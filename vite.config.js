@@ -19,20 +19,39 @@ if (existsSync(logoSource) && !existsSync(logoDest)) {
   }
 }
 
-// https://vite.dev/config/
 export default defineConfig({
-  // Base path solo para producción (GitHub Pages)
-  // En desarrollo, usar '/' para que las rutas funcionen normalmente
-  base: process.env.NODE_ENV === 'production' ? "/NeysanaPlussPB" : "/",
-  // https://JuanJ00Cr.github.io/NeysanaPlussPB
+  base: '/',
   plugins: [
     react({
       babel: {
         plugins: [['babel-plugin-react-compiler']],
-        
       },
     }),
     tailwindcss(),
   ],
 })
+
+
+
+
+
+
+
+
+// https://vite.dev/config/
+// export default defineConfig({
+//   // Base path solo para producción (GitHub Pages)
+//   // En desarrollo, usar '/' para que las rutas funcionen normalmente
+//   base: process.env.NODE_ENV === 'production' ? "/NeysanaPlussPB" : "/",
+//   // https://JuanJ00Cr.github.io/NeysanaPlussPB
+//   plugins: [
+//     react({
+//       babel: {
+//         plugins: [['babel-plugin-react-compiler']],
+        
+//       },
+//     }),
+//     tailwindcss(),
+//   ],
+// })
 
