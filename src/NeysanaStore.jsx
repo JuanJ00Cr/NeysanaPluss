@@ -16,6 +16,11 @@ const getPartnerImageUrl = (imageName) => {
   return `${import.meta.env.BASE_URL}img/aliados/${imageName}`;
 };
 
+// Función helper para obtener URL de iconos de pago
+const getPaymentIconUrl = (iconName) => {
+  return `${import.meta.env.BASE_URL}img/pago/${iconName}`;
+};
+
 // ====================================================================
 // COMPONENTES AUXILIARES
 // ====================================================================
@@ -519,6 +524,70 @@ const ServicesSection = ({ setCurrentView }) => (
       </ul>
     </div>
 
+    {/* Galería de Imágenes de Servicios */}
+    <div className="mb-12">
+      <h3 className="text-2xl font-bold text-emerald-700 mb-6 text-center flex items-center justify-center">
+        <Star className="mr-2 text-emerald-600" size={28} />
+        Nuestros Servicios en Imágenes
+      </h3>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
+          <div className="relative h-64 overflow-hidden">
+            <img
+              src={getPartnerImageUrl('cliente.jpeg')}
+              alt="Cliente satisfecho"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.parentElement.innerHTML = '<div class="w-full h-full bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center"><span class="text-gray-400">Imagen no disponible</span></div>';
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+              <p className="font-semibold text-lg">Atención Personalizada</p>
+              <p className="text-sm opacity-90">Nuestros clientes son nuestra prioridad</p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
+          <div className="relative h-64 overflow-hidden">
+            <img
+              src={getPartnerImageUrl('examinador cuantico.jpeg')}
+              alt="Examinador Cuántico"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.parentElement.innerHTML = '<div class="w-full h-full bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center"><span class="text-gray-400">Imagen no disponible</span></div>';
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+              <p className="font-semibold text-lg">Tecnología Avanzada</p>
+              <p className="text-sm opacity-90">Examen Cuántico Bio-Eléctrico</p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
+          <div className="relative h-64 overflow-hidden">
+            <img
+              src={getPartnerImageUrl('examinadorc.jpeg')}
+              alt="Equipo de Examen"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.parentElement.innerHTML = '<div class="w-full h-full bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center"><span class="text-gray-400">Imagen no disponible</span></div>';
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+              <p className="font-semibold text-lg">Equipo Profesional</p>
+              <p className="text-sm opacity-90">Cuidamos tu salud con excelencia</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     {/* Información del Examen Cuántico */}
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
       <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl shadow-xl p-8">
@@ -630,7 +699,7 @@ const CheckoutSection = ({ cart, total, onBack, onUpdateQuantity, onRemoveFromCa
     if (paymentMethod === 'contra-entrega') {
       alert('¡Pedido registrado! Te contactaremos pronto para confirmar tu pedido y coordinar la entrega.');
     } else {
-      alert('¡Pedido registrado! Por favor realiza la consignación y envía el comprobante por WhatsApp.');
+      alert('¡Pedido registrado! Por favor realiza el pago por Nequi o Daviplata y envía el comprobante por WhatsApp.');
     }
   };
 
@@ -685,44 +754,100 @@ const CheckoutSection = ({ cart, total, onBack, onUpdateQuantity, onRemoveFromCa
                   className="mr-4"
                 />
                 <div className="flex-1">
-                  <div className="font-bold text-gray-800">Consignación Bancaria</div>
-                  <div className="text-sm text-gray-600">Transfiere a nuestra cuenta</div>
+                  <div className="font-bold text-gray-800">Pago por Nequi y Daviplata</div>
+                  <div className="text-sm text-gray-600">Transfiere a nuestros números</div>
                 </div>
-                <CreditCard className="text-emerald-600" size={24} />
+                <div className="flex items-center space-x-2">
+                  <img 
+                    src={getPaymentIconUrl('Nequi.png')} 
+                    alt="Nequi" 
+                    className="w-10 h-10 rounded-lg object-cover"
+                  />
+                  <img 
+                    src={getPaymentIconUrl('Daviplata.png')} 
+                    alt="Daviplata" 
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                </div>
               </label>
             </div>
           </div>
 
-          {/* Información de Consignación */}
+          {/* Información de Pago Nequi y Daviplata */}
           {paymentMethod === 'consignacion' && (
             <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl shadow-lg p-6 border-2 border-emerald-200">
-              <h3 className="text-xl font-bold text-emerald-800 mb-4">Datos para Consignación</h3>
-              <div className="space-y-3 text-gray-700">
-                <div className="flex justify-between">
-                  <span className="font-semibold">Banco:</span>
-                  <span>Bancolombia</span>
+              <h3 className="text-xl font-bold text-emerald-800 mb-6 flex items-center">
+                <CreditCard className="mr-2 text-emerald-600" size={24} />
+                Datos para Pago
+              </h3>
+              
+              {/* Métodos de Pago */}
+              <div className="mb-6 flex items-center justify-center space-x-4">
+                <div className="flex items-center space-x-2 bg-white px-4 py-3 rounded-lg shadow-md">
+                  <div className="w-12 h-12 rounded-lg bg-white flex items-center justify-center shadow-sm overflow-hidden">
+                    <img 
+                      src={getPaymentIconUrl('Nequi.png')} 
+                      alt="Nequi" 
+                      className="w-full h-full rounded-lg object-cover"
+                    />
+                  </div>
+                  <span className="font-bold text-gray-800">Nequi</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="font-semibold">Tipo de Cuenta:</span>
-                  <span>Ahorros</span>
+                <span className="text-gray-400 font-bold">y</span>
+                <div className="flex items-center space-x-2 bg-white px-4 py-3 rounded-lg shadow-md">
+                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm overflow-hidden">
+                    <img 
+                      src={getPaymentIconUrl('Daviplata.png')} 
+                      alt="Daviplata" 
+                      className="w-full h-full rounded-full object-cover"
+                    />
+                  </div>
+                  <span className="font-bold text-gray-800">Daviplata</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="font-semibold">Número de Cuenta:</span>
-                  <span className="font-mono">1234567890</span>
+              </div>
+
+              {/* Números de Pago */}
+              <div className="space-y-4 mb-6">
+                <div className="bg-white rounded-xl p-6 shadow-md border-l-4 border-blue-500">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-semibold text-gray-700">Número 1:</span>
+                    <span className="font-mono text-xl font-bold text-blue-700">313 800 2732</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-gray-700">Titular:</span>
+                    <span className="font-semibold text-blue-700">LUI** TAR**</span>
+                  </div>
+                  <div className="mt-3 pt-3 border-t border-gray-200">
+                    <p className="text-xs text-gray-600 flex items-center">
+                      <CheckCircle className="mr-2 text-blue-600" size={14} />
+                      Disponible para Nequi y Daviplata
+                    </p>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span className="font-semibold">Titular:</span>
-                  <span>Neysana Pluss S.A.S.</span>
+
+                <div className="bg-white rounded-xl p-6 shadow-md border-l-4 border-green-500">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-semibold text-gray-700">Número 2:</span>
+                    <span className="font-mono text-xl font-bold text-green-700">314 274 3030</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-gray-700">Titular:</span>
+                    <span className="font-semibold text-green-700">MAR** MAR**</span>
+                  </div>
+                  <div className="mt-3 pt-3 border-t border-gray-200">
+                    <p className="text-xs text-gray-600 flex items-center">
+                      <CheckCircle className="mr-2 text-green-600" size={14} />
+                      Disponible para Nequi y Daviplata
+                    </p>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span className="font-semibold">NIT:</span>
-                  <span className="font-mono">900123456-7</span>
-                </div>
-                <div className="mt-4 p-4 bg-white rounded-lg">
-                  <p className="text-sm text-gray-600">
-                    <strong>Importante:</strong> Después de realizar la consignación, envía el comprobante por WhatsApp al número +57 300 441 4962 para procesar tu pedido.
-                  </p>
-                </div>
+              </div>
+
+              {/* Nota importante */}
+              <div className="mt-4 p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                <p className="text-sm text-gray-700">
+                  <strong className="text-yellow-700">⚠️ Importante:</strong> Después de realizar el pago, envía el comprobante por WhatsApp al número <strong>+57 313 800 2732</strong> o <strong>+57 314 274 3030</strong> para procesar tu pedido.
+                </p>
               </div>
             </div>
           )}
@@ -1562,7 +1687,7 @@ const NeysanaStore = () => {
       {!showCheckout && (
         <footer className="bg-gradient-to-r from-slate-800 via-emerald-900 to-teal-900 text-white mt-16 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
               <h3 className="text-xl font-bold mb-4">Neysana Pluss</h3>
                 <p className="text-slate-300 mb-4">Productos naturales para tu salud y bienestar</p>
@@ -1606,14 +1731,27 @@ const NeysanaStore = () => {
             </div>
             <div>
               <h3 className="text-xl font-bold mb-4">Horario</h3>
-                <p className="text-slate-300">Lunes - Viernes: 8am - 6pm</p>
-                <p className="text-slate-300">Sábados: 9am - 2pm</p>
+                <p className="text-slate-300">Lunes - Viernes: 7:30am - 4:30pm</p>
+                <p className="text-slate-300">Sábados: 7:30am - 4:30pm</p>
                 <p className="text-slate-300">Domingos: Cerrado</p>
-              </div>
             </div>
+            <div>
+              <h3 className="text-xl font-bold mb-4">Trabaja con Nosotros</h3>
+                <p className="text-slate-300 mb-3">¿Quieres formar parte de nuestro equipo?</p>
+                <p className="text-slate-300 mb-3">Envía tu hoja de vida a:</p>
+                <a 
+                  href="mailto:empresaneysana@gmail.com?subject=Hoja de Vida - Candidato"
+                  className="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center transition"
+                >
+                  <Mail className="mr-2" size={18} />
+                  empresaneysana@gmail.com
+                </a>
+            </div>
+          </div>
             <div className="border-t border-slate-700 mt-8 pt-8 text-center text-slate-300">
             <p>© 2026 Neysana Pluss. Todos los derechos reservados.</p>
           </div>
+          
         </div>
       </footer>
       )}
